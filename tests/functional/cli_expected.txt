@@ -1,0 +1,95 @@
+(0 rows)
++----------+
+| count(*) |
++----------+
+| 0        |
++----------+
+(0 rows)
+inserted 1 row (id = 1)
+inserted 1 row (id = 2)
+inserted 1 row (id = 3)
+inserted 1 row (id = 4)
+inserted 1 row (id = 5)
+inserted 1 row (id = 6)
++----+---------+-----+-----------------------------+
+| id | name    | age | email                       |
++----+---------+-----+-----------------------------+
+| 1  | alice   | 30  | alice@example.com           |
+| 2  | bob     | 25  | bob@example.com             |
+| 3  | carol   | 41  |                             |
+| 4  | dave    | 25  | dave@example.com            |
+| 5  | 김민성  | 27  | minseong@example.com        |
+| 6  | O'Brien | -3  | semi;colon -- not a comment |
++----+---------+-----+-----------------------------+
+(6 rows)
++----------+
+| count(*) |
++----------+
+| 6        |
++----------+
++------+----+
+| name | id |
++------+----+
+| dave | 4  |
++------+----+
+(1 row)
++----+---------+
+| id | name    |
++----+---------+
+| 5  | 김민성  |
+| 6  | O'Brien |
++----+---------+
+(2 rows)
++----+
+| id |
++----+
+| 1  |
+| 2  |
++----+
+(2 rows)
+(0 rows)
++------+
+| name |
++------+
+| bob  |
+| dave |
++------+
+(2 rows)
++-------+
+| name  |
++-------+
+| alice |
+| carol |
++-------+
+(2 rows)
++---------+
+| name    |
++---------+
+| O'Brien |
++---------+
+(1 row)
++----------+
+| count(*) |
++----------+
+| 4        |
++----------+
+(0 rows)
+plan: INDEX SCAN (B+Tree point lookup on id)
+plan: INDEX RANGE SCAN (B+Tree leaf chain on id)
+plan: FULL SCAN (linear)
+plan: FULL SCAN (linear)
+plan: METADATA (row counter)
+ERROR: syntax error at line 40, col 1: expected SELECT or INSERT but found 'selec'
+ERROR: table 'ghost' does not exist
+ERROR: column 'nope' does not exist in table 'users'
+ERROR: type mismatch in WHERE: column 'age' is INT but the value is VARCHAR
+ERROR: expected 3 value(s) but got 2
+ERROR: type mismatch for column 'name': expected VARCHAR but got INT
+ERROR: column 'id' is assigned automatically and cannot be set
+ERROR: value too long for column 'name': 50 bytes, VARCHAR(32)
++----------+
+| count(*) |
++----------+
+| 6        |
++----------+
+ERROR: syntax error at line 51, col 46: expected ',' or ')' but found 'e'
