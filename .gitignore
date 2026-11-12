@@ -2,3 +2,14 @@ build/
 build-*/
 data/*.tbl
 *.o
+
+# 비밀 정보
+.env
+.env.*
+!.env.example
+secrets/
+
+# Claude Code 개인 설정, 로그, worktree (팀 설정인 .claude/settings.json은 커밋한다)
+.claude/settings.local.json
+.claude/logs/
+.claude/worktrees/
