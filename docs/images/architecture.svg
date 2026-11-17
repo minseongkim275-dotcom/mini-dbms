@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 330" width="880" font-family="-apple-system, 'Segoe UI', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif">
+  <title>구조: CLI와 서버가 같은 엔진(db_execute)을 부르고, 엔진은 lexer, parser, 실행기를 거쳐 파일과 B+ 트리를 쓴다</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5b6675"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="879" height="329" rx="14" fill="#ffffff" stroke="#d8dee6"/>
+  <text x="36" y="44" font-size="19" font-weight="700" fill="#101828">엔진은 하나, 들어오는 문은 둘</text>
+  <text x="36" y="68" font-size="13" fill="#5b6675">CLI와 HTTP 서버는 같은 함수 db_execute()를 부른다</text>
+
+  <!-- 진입점 -->
+  <g font-size="14">
+    <rect x="36" y="104" width="170" height="60" rx="8" fill="#f3f6fb" stroke="#d8dee6"/>
+    <text x="121" y="130" text-anchor="middle" font-weight="700" fill="#101828">minidb</text>
+    <text x="121" y="149" text-anchor="middle" font-size="12" fill="#5b6675">CLI · 파일, 한 줄, 대화형</text>
+
+    <rect x="36" y="204" width="170" height="60" rx="8" fill="#f3f6fb" stroke="#d8dee6"/>
+    <text x="121" y="230" text-anchor="middle" font-weight="700" fill="#101828">minidb-server</text>
+    <text x="121" y="249" text-anchor="middle" font-size="12" fill="#5b6675">HTTP · 스레드 풀</text>
+  </g>
+
+  <!-- 엔진 -->
+  <rect x="250" y="96" width="400" height="176" rx="10" fill="#eef4ff" stroke="#b9cdf7"/>
+  <text x="266" y="120" font-size="12" font-weight="700" fill="#1f5fd6">db_execute()</text>
+  <g font-size="14">
+    <rect x="266" y="150" width="104" height="68" rx="8" fill="#ffffff" stroke="#2563eb"/>
+    <text x="318" y="180" text-anchor="middle" font-weight="700" fill="#101828">lexer</text>
+    <text x="318" y="199" text-anchor="middle" font-size="12" fill="#5b6675">문자열 → 토큰</text>
+
+    <rect x="398" y="150" width="104" height="68" rx="8" fill="#ffffff" stroke="#2563eb"/>
+    <text x="450" y="180" text-anchor="middle" font-weight="700" fill="#101828">parser</text>
+    <text x="450" y="199" text-anchor="middle" font-size="12" fill="#5b6675">토큰 → Stmt</text>
+
+    <rect x="530" y="150" width="104" height="68" rx="8" fill="#ffffff" stroke="#2563eb"/>
+    <text x="582" y="180" text-anchor="middle" font-weight="700" fill="#101828">실행기</text>
+    <text x="582" y="199" text-anchor="middle" font-size="12" fill="#5b6675">계획 · 잠금</text>
+  </g>
+  <text x="450" y="252" text-anchor="middle" font-size="12" fill="#5b6675">타입 검사 → 실행 계획 선택 → 테이블 잠금 → 실행</text>
+
+  <!-- 저장 -->
+  <g font-size="14">
+    <rect x="694" y="104" width="150" height="60" rx="8" fill="#f3f6fb" stroke="#d8dee6"/>
+    <text x="769" y="130" text-anchor="middle" font-weight="700" fill="#101828">B+ 트리</text>
+    <text x="769" y="149" text-anchor="middle" font-size="12" fill="#5b6675">메모리 · id → 오프셋</text>
+
+    <rect x="694" y="204" width="150" height="60" rx="8" fill="#f3f6fb" stroke="#d8dee6"/>
+    <text x="769" y="230" text-anchor="middle" font-weight="700" fill="#101828">테이블 파일</text>
+    <text x="769" y="249" text-anchor="middle" font-size="12" fill="#5b6675">디스크 · 고정 길이 레코드</text>
+  </g>
+
+  <!-- 화살표 -->
+  <g stroke="#5b6675" stroke-width="1.5" fill="none" marker-end="url(#a)">
+    <path d="M206 134 L246 160"/>
+    <path d="M206 234 L246 208"/>
+    <path d="M370 184 L394 184"/>
+    <path d="M502 184 L526 184"/>
+    <path d="M634 170 L690 140"/>
+    <path d="M634 198 L690 228"/>
+  </g>
+  <path d="M769 168 L769 200" stroke="#5b6675" stroke-width="1.5" stroke-dasharray="4 3" fill="none" marker-end="url(#a)"/>
+  <text x="778" y="189" font-size="11" fill="#5b6675">pread</text>
+
+  <text x="36" y="304" font-size="12" fill="#7a8494">인덱스는 메모리에만 있다. 테이블을 처음 열 때 파일을 한 번 훑어 다시 만든다.</text>
+</svg>
