@@ -27,7 +27,7 @@ done
 changed=$( {
   git status --porcelain | cut -c4-
   [ -n "$base" ] && git diff --name-only "$base" HEAD
-} 2>/dev/null | grep -Ev '(\.md$|^\.claude/|^\.github/|^docs/|^\.git(ignore|attributes)$)' )
+} 2>/dev/null | grep -Ev '(\.md$|^\.claude/|^\.github/|^docs/|^\.git(ignore|attributes)$|^\.mcp\.json$)' )
 [ -z "$changed" ] && exit 0   # 질문만 한 세션, 읽기만 한 리뷰 세션은 검사하지 않음
 
 # 실패하는 테스트를 먼저 쓰는 단계: `touch .claude/logs/red-phase`로 표시하면 30분 동안 통과시킨다.
