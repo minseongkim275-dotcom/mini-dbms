@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 290" width="880" font-family="-apple-system, 'Segoe UI', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif">
+  <title>요청 처리 흐름: accept 스레드가 유한 큐에 넣고 워커가 꺼내 실행한다. 큐가 가득 차면 바로 503을 준다</title>
+  <defs>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5b6675"/>
+    </marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="879" height="289" rx="14" fill="#ffffff" stroke="#d8dee6"/>
+  <text x="36" y="44" font-size="19" font-weight="700" fill="#101828">과부하일 때는 기다리게 하지 않고 바로 거절한다</text>
+  <text x="36" y="68" font-size="13" fill="#5b6675">큐 크기에 상한이 있어 메모리가 무한히 늘지 않는다</text>
+
+  <g font-size="14">
+    <rect x="36" y="110" width="120" height="64" rx="8" fill="#f3f6fb" stroke="#d8dee6"/>
+    <text x="96" y="138" text-anchor="middle" font-weight="700" fill="#101828">클라이언트</text>
+    <text x="96" y="157" text-anchor="middle" font-size="12" fill="#5b6675">POST /query</text>
+
+    <rect x="200" y="110" width="130" height="64" rx="8" fill="#ffffff" stroke="#2563eb"/>
+    <text x="265" y="138" text-anchor="middle" font-weight="700" fill="#101828">accept 스레드</text>
+    <text x="265" y="157" text-anchor="middle" font-size="12" fill="#5b6675">연결만 받는다</text>
+
+    <rect x="374" y="110" width="150" height="64" rx="8" fill="#eef4ff" stroke="#b9cdf7"/>
+    <text x="449" y="134" text-anchor="middle" font-weight="700" fill="#101828">유한 작업 큐</text>
+    <g fill="#2563eb">
+      <rect x="398" y="146" width="18" height="16" rx="3"/>
+      <rect x="420" y="146" width="18" height="16" rx="3"/>
+      <rect x="442" y="146" width="18" height="16" rx="3"/>
+    </g>
+    <g fill="#ffffff" stroke="#b9cdf7">
+      <rect x="464" y="146" width="18" height="16" rx="3"/>
+      <rect x="486" y="146" width="18" height="16" rx="3"/>
+    </g>
+
+    <rect x="568" y="110" width="130" height="64" rx="8" fill="#ffffff" stroke="#2563eb"/>
+    <text x="633" y="138" text-anchor="middle" font-weight="700" fill="#101828">워커 N개</text>
+    <text x="633" y="157" text-anchor="middle" font-size="12" fill="#5b6675">미리 만들어 둠</text>
+
+    <rect x="742" y="110" width="102" height="64" rx="8" fill="#f3f6fb" stroke="#d8dee6"/>
+    <text x="793" y="138" text-anchor="middle" font-weight="700" fill="#101828">엔진</text>
+    <text x="793" y="157" text-anchor="middle" font-size="12" fill="#5b6675">db_execute()</text>
+
+    <rect x="200" y="216" width="324" height="44" rx="8" fill="#fff4ed" stroke="#f3c7a8"/>
+    <text x="362" y="243" text-anchor="middle" fill="#9a3412"><tspan font-weight="700">503</tspan> · 큐가 가득 차면 accept 스레드가 직접 응답</text>
+  </g>
+
+  <g stroke="#5b6675" stroke-width="1.5" fill="none" marker-end="url(#b)">
+    <path d="M156 142 L196 142"/>
+    <path d="M330 142 L370 142"/>
+    <path d="M524 142 L564 142"/>
+    <path d="M698 142 L738 142"/>
+  </g>
+  <path d="M265 174 L265 212" stroke="#c2410c" stroke-width="1.5" stroke-dasharray="4 3" fill="none" marker-end="url(#r)"/>
+
+  <text x="568" y="243" font-size="12" fill="#7a8494">SIGINT/SIGTERM: 새 연결을 받지 않고</text>
+  <text x="568" y="260" font-size="12" fill="#7a8494">큐에 남은 요청을 모두 끝낸 뒤 종료</text>
+</svg>
