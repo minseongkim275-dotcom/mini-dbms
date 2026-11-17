@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 220" width="880" font-family="-apple-system, 'Segoe UI', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif">
+  <title>Mini-DBMS: SQL 처리기, B+ 트리 인덱스, 스레드 풀 API 서버</title>
+  <rect x="0.5" y="0.5" width="879" height="219" rx="14" fill="#ffffff" stroke="#d8dee6"/>
+  <rect x="0.5" y="0.5" width="10" height="219" rx="5" fill="#2563eb"/>
+
+  <text x="44" y="52" font-size="13" font-weight="600" fill="#1f5fd6" letter-spacing="1">KRAFTON JUNGLE 13기 · C11 · POSIX</text>
+  <text x="44" y="100" font-size="42" font-weight="800" fill="#101828">Mini-DBMS</text>
+  <text x="44" y="132" font-size="16" fill="#3d4756">SQL 문자열 한 줄이 디스크의 레코드가 되기까지, 외부 라이브러리 없이 직접 만든 데이터베이스</text>
+
+  <g font-size="13">
+    <rect x="44" y="158" width="236" height="38" rx="8" fill="#f3f6fb" stroke="#d8dee6"/>
+    <text x="60" y="182" font-weight="700" fill="#1f5fd6">Phase 1</text>
+    <text x="118" y="182" fill="#101828">SQL 처리기와 파일 저장</text>
+
+    <rect x="294" y="158" width="236" height="38" rx="8" fill="#f3f6fb" stroke="#d8dee6"/>
+    <text x="310" y="182" font-weight="700" fill="#1f5fd6">Phase 2</text>
+    <text x="368" y="182" fill="#101828">B+ 트리 인덱스</text>
+
+    <rect x="544" y="158" width="292" height="38" rx="8" fill="#f3f6fb" stroke="#d8dee6"/>
+    <text x="560" y="182" font-weight="700" fill="#1f5fd6">Phase 3</text>
+    <text x="618" y="182" fill="#101828">스레드 풀 HTTP API 서버</text>
+  </g>
+</svg>
